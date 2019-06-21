@@ -55,15 +55,13 @@ Run it like this:
 
 # HERE'S WHERE IT GETS TWISTY!
 
-class MadlibProtocol(Protocol):
-    def connectionMade(self):
-        print("SOMEONE CONNECTED AYY")
+#class MadlibProtocol(Protocol):
     # This is where we will overload Protocol callbacks!
 
 
 class MadlibFactory(ServerFactory):
 
-    protocol = MadlibProtocol
+    protocol = Protocol
 
     # This is where we will spawn protocols from!
 
