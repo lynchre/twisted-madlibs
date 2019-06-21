@@ -56,17 +56,32 @@ Run it like this:
 # HERE'S WHERE IT GETS TWISTY!
 
 class MadlibProtocol(Protocol):
+    def connectionMade(self):
+        print("SOMEONE CONNECTED AYY")
     # This is where we will overload Protocol callbacks!
 
 
 class MadlibFactory(ServerFactory):
 
+    protocol = MadlibProtocol
+
     # This is where we will spawn protocols from!
 
     
 def main():
-    # We will do other fun stuff here
-    print("this is main, it's great")
+    options, madlib_file = parse_args()
+
+    madlib = open(madlib_file).read()
+
+    factory = MadlibFactory(madlib, ML_INDEX)
+
+    from twisted.internet import reactor
+
+    port = reactor.listenTCP(options.port or 0, factory, interface=options.iface)
+
+    print('Serving {} on {}.'.format(madlib_file, port.getHost()))
+
+    reactor.run()
 
 
 if __name__ == "__main__":
