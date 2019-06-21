@@ -73,7 +73,7 @@ def main():
 
     madlib = open(madlib_file).read()
 
-    factory = MadlibFactory(madlib, ML_INDEX)
+    factory = MadlibFactory()
 
     from twisted.internet import reactor
 

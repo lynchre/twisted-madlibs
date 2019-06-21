@@ -40,11 +40,14 @@ def parse_args():
 
 # HERE'S WHERE IT GETS TWISTY!
 
-class MadLibProtocol(Protocol):
+#class MadLibProtocol(Protocol):
     # This is where we will overload Protocol callbacks!
 
 class MadlibClientFactory(ClientFactory):
+    protocol = Protocol
     # This is where we will spawn protocols (and clean things up when they finish!)
+    def __init__(self, deferred):
+        self.deferred = deferred
 
 
 def get_madlib(host, port):
